@@ -2,7 +2,7 @@
 
 This was created as part of YouTube Video. Links below
 
-![GitHub Logo](https://raddy.dev/wp-content/uploads/2020/09/nodejs-news-website-rest-api_compressed.jpg)
+![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
 
 ## Installation
 
