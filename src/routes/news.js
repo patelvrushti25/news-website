@@ -1,14 +1,13 @@
 const express = require('express')
 const newsRouter = express.Router()
 const axios = require('axios')
+require('dotenv').config()
 
-newsRouter.get('', async (req, res) => {
+newsRouter.get('/', async (req, res) => {
     try {
-         var url = 'http://newsapi.org/v2/top-headlines?' +
-          'country=in&' +
-          'apiKey=36f3e29b704f41339af8439dc1228334';
+         var url = `http://newsapi.org/v2/top-headlines?country=in&apiKey=${process.env.TOKEN}`;
         const newsAPI = await axios.get(url)
-        //const newsAPI = await axios.get(`https://raddy.dev/wp-json/wp/v2/posts/`)
+        // const newsAPI = await axios.get(`https://raddy.dev/wp-json/wp/v2/posts/`)
         res.render('news', { articles: newsAPI.data.articles })
     } catch (err) {
         if (err.response) {
@@ -26,6 +25,65 @@ newsRouter.get('', async (req, res) => {
     }
 })
 
+newsRouter.get('/entertainment', async(req, res) => {
+    try {
+        
+        let entertainment_url = `http://newsapi.org/v2/top-headlines?country=in&category=entertainment&apiKey=${process.env.TOKEN}`;
+    
+        const entertainment = await axios.get(entertainment_url);
+        console.log(entertainment.data)
+        // res.render('news', { politics : politics })
+        res.render('news', { articles: entertainment.data.articles })
+    } catch (error) {
+        res.render('news', { articles: null })
+        console.log(error)
+    }
+})
+
+newsRouter.get('/health', async(req, res) => {
+    try {
+        
+        let health_url = `http://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=${process.env.TOKEN}`;
+    
+        const health = await axios.get(health_url);
+        console.log(health.data)
+        // res.render('news', { politics : politics })
+        res.render('news', { articles: health.data.articles })
+    } catch (error) {
+        res.render('news', { articles: null })
+        console.log(error)
+    }
+})
+
+newsRouter.get('/sports', async(req, res) => {
+    try {
+        
+        let sports_url = `http://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=${process.env.TOKEN}`;
+    
+        const sports = await axios.get(sports_url);
+        console.log(sports.data)
+        // res.render('news', { politics : politics })
+        res.render('news', { articles: sports.data.articles })
+    } catch (error) {
+        res.render('news', { articles: null })
+        console.log(error)
+    }
+})
+
+newsRouter.get('/technology', async(req, res) => {
+    try {
+        
+        let technology_url = `http://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=${process.env.TOKEN}`;
+    
+        const technology = await axios.get(technology_url);
+        console.log(technology.data)
+        // res.render('news', { politics : politics })
+        res.render('news', { articles: technology.data.articles })
+    } catch (error) {
+        res.render('news', { articles: null })
+        console.log(error)
+    }
+})
 newsRouter.get('/:id', async (req, res) => {
     //let articleID = req.params.id
     let category = req.params.category;
@@ -33,7 +91,7 @@ newsRouter.get('/:id', async (req, res) => {
        
         var url = 'http://newsapi.org/v2/top-headlines?country=in&category=' 
         + category + 
-        '&apiKey=36f3e29b704f41339af8439dc1228334';
+        '&apiKey=885fb49181994fb0b02a5c02563195d9';
         const newsAPI = await axios.get(url)
 
          //const newsAPI = await axios.get(`https://raddy.dev/wp-json/wp/v2/posts/${articleID}`)
@@ -60,7 +118,7 @@ newsRouter.post('', async (req, res) => {
     let search = req.body.search
     try {
 
-        var url = `http://newsapi.org/v2/everything?q=${search}&apiKey=36f3e29b704f41339af8439dc1228334`
+        var url = `http://newsapi.org/v2/everything?q=${search}&apiKey=885fb49181994fb0b02a5c02563195d9`
 
         //const newsAPI = await axios.get(`https://raddy.dev/wp-json/wp/v2/posts?search=${search}`)
         const newsAPI = await axios.get(url)
@@ -79,7 +137,10 @@ newsRouter.post('', async (req, res) => {
             console.error('Error', err.message)
         }
     }
+
+
 })
+
 
 
 module.exports = newsRouter 
