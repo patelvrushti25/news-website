@@ -84,6 +84,38 @@ newsRouter.get('/technology', async(req, res) => {
         console.log(error)
     }
 })
+
+newsRouter.get('/business', async(req, res) => {
+    try {
+        
+        let business_url = `http://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=${process.env.TOKEN}`;
+    
+        const business = await axios.get(business_url);
+        console.log(business.data)
+        // res.render('news', { politics : politics })
+        res.render('news', { articles: business.data.articles })
+    } catch (error) {
+        res.render('news', { articles: null })
+        console.log(error)
+    }
+})
+
+
+newsRouter.get('/general', async(req, res) => {
+    try {
+        
+        let general_url = `http://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=${process.env.TOKEN}`;
+    
+        const general = await axios.get(general_url);
+        console.log(general.data)
+        // res.render('news', { politics : politics })
+        res.render('news', { articles: general.data.articles })
+    } catch (error) {
+        res.render('news', { articles: null })
+        console.log(error)
+    }
+})
+
 newsRouter.get('/:id', async (req, res) => {
     //let articleID = req.params.id
     let category = req.params.category;
